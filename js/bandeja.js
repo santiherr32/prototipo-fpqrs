@@ -10,7 +10,7 @@ $(document).ready(function () {
   if (!Auth.requireAuth()) return;
   Auth.renderUserInfo();
 
-  const PAGE_SIZE = 10;
+  let PAGE_SIZE = 10;
   let currentPage = 1;
   let sortColumn = 'fechaRadicacion';
   let sortDir = 'desc';
@@ -207,6 +207,13 @@ $(document).ready(function () {
     renderTable();
     // Scroll to top of table
     $('.data-table-wrapper')[0]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Items per page
+  $('#items-per-page').on('change', function () {
+    PAGE_SIZE = parseInt($(this).val());
+    currentPage = 1;
+    renderTable();
   });
 
   // Filter toggle

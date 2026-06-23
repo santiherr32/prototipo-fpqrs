@@ -4,7 +4,7 @@ Este repositorio contiene la implementación frontend del **Sistema de Gestión 
 
 ## 🚀 Tecnologías Utilizadas
 
-En cumplimiento con los requerimientos técnicos establecidos, este proyecto se ha construido utilizando exclusivamente tecnologías base del lado del cliente, sin frameworks SPA (React/Angular/Vue) ni compiladores de CSS (Tailwind):
+El proyecto se ha construido utilizando exclusivamente tecnologías base del lado del cliente, sin frameworks SPA (React/Angular/Vue) ni compiladores de CSS (Tailwind):
 
 - **HTML5 Semántico**: Estructuración accesible y moderna de las 4 vistas requeridas.
 - **CSS3 (Vanilla)**: Implementación de un *Design System* a la medida (`css/styles.css`) con variables CSS (`:root`), que replica fielmente los tokens de diseño del prototipo (colores Slate/Primary, tipografías, sombras y radios de borde).
@@ -37,7 +37,7 @@ prototipo-fpqrs/
 │   └── formulario.js     # Validaciones, carga de archivos y selects en cascada
 └── assets/
     └── images/
-        └── logo.png      # Logo del sistema generado
+        └── logo.png      # Logo del sistema
 ```
 
 ---
@@ -110,12 +110,10 @@ Aunque el alcance era de maquetación, se agregó lógica en JavaScript para sim
    - Validaciones de campos obligatorios, formato de correo y check de políticas de datos.
    - Modal de éxito que simula la generación de un número de radicado (Ej: FPQRS-2026-84392).
 
----
+## 📝 Consideraciones Relevantes sobre la Implementación Realizada
 
-## 🎨 Notas sobre la Fidelidad del Diseño
-
-- Se analizaron meticulosamente las clases de Tailwind del Next.js original suministrado en el prototipo.
-- Las variables de color (Slate, Blue, Emerald, Amber, Red) fueron extraídas y aplicadas a los `badge-pill`, `stat-card` y botones para asegurar una paridad visual del 100%.
-- El sidebar colapsable es totalmente responsivo y se adapta a dispositivos móviles mediante un overlay y un menú de hamburguesa.
-
-Desarrollado con ❤️ para CoopFinanzas.
+1. **Auditoría de Calidad Web (Lighthouse)**: El prototipo fue sometido a una auditoría técnica donde se aplicaron optimizaciones de **Performance** (preconexiones, eliminación de `@import`, scripts con `defer`), **Accesibilidad** (contraste WCAG AA para validaciones, roles ARIA en gráficos SVG) y **SEO** (metadatos Open Graph y URLs canónicas).
+2. **Formulario Público Dinámico**: El flujo de radicación se refactorizó para mostrar una vista de éxito completa dentro de la misma página (sin recargar), reemplazando el uso de modales. Además, se introdujeron validaciones dinámicas en el lado del cliente (ej. regex para celular colombiano de 10 dígitos y reglas de longitud).
+3. **Compatibilidad y Librerías**: A solicitud del requerimiento técnico, se mantuvo el uso intensivo de **jQuery** como motor principal de manipulación del DOM y eventos, equilibrando su uso con APIs nativas de JavaScript donde el rendimiento lo exigía.
+4. **Fidelidad Visual (Pixel Perfect)**: Se extrajeron las variables de color (Slate, Blue, Emerald, Amber, Red) y propiedades de diseño (tipografías, sombras) desde la especificación original, implementándose a través de un sistema de variables CSS puro (`css/global.css` y `css/components.css`) para evitar dependencias de compiladores externos como Tailwind CSS.
+5. **Simulación Mockup**: Todo el manejo de datos (cambios de estado, radicación, comentarios e historial) ocurre en la memoria del navegador, brindando una experiencia "real" sin necesidad de backend.

@@ -355,6 +355,38 @@ const APP_DATA = {
   }
 };
 
+// Generar más casos dinámicamente para probar paginación (50+ casos en total)
+(function generarCasosExtra() {
+  const tipos = APP_DATA.tiposCaso.map(t => t.nombre);
+  const prioridades = APP_DATA.prioridades.map(p => p.nombre);
+  const estados = APP_DATA.estados.map(e => e.nombre);
+  const responsables = APP_DATA.responsables.map(r => r.nombre);
+  const nombres = ['Luis Gaviria', 'Camila Ruiz', 'Pedro Sánchez', 'María Paz', 'David Jaramillo', 'Ana Herrera', 'Juan Pablo Montoya', 'Diana Rojas', 'Carlos Vargas', 'Luisa Castro', 'Andrés Felipe Gómez', 'Laura Sofía Marín'];
+  const semaforos = ['verde', 'amarillo', 'rojo', 'gris'];
+  
+  // Actualmente hay 15 casos, agregaremos 65 más para tener 80
+  for (let i = 16; i <= 80; i++) {
+    const estado = estados[Math.floor(Math.random() * estados.length)];
+    const semaforo = estado === 'Cerrado' || estado === 'Anulado' ? 'gris' : semaforos[Math.floor(Math.random() * 3)]; // verde, amarillo, rojo
+    
+    APP_DATA.casos.push({
+      id: 'c-' + (i < 10 ? '0' + i : i),
+      radicado: 'FPQRS-2026-04' + (700 + i),
+      fechaRadicacion: '08/05/2026',
+      tipo: tipos[Math.floor(Math.random() * tipos.length)],
+      servicio: 'Atención al Asociado',
+      categoria: 'Otros',
+      subcategoria: 'Caso generado automáticamente',
+      asociado: nombres[Math.floor(Math.random() * nombres.length)],
+      responsable: responsables[Math.floor(Math.random() * responsables.length)],
+      prioridad: prioridades[Math.floor(Math.random() * prioridades.length)],
+      estado: estado,
+      limiteSLA: '15/05/2026',
+      semaforo: semaforo
+    });
+  }
+})();
+
 /*  Helper Functions  */
 
 /* 

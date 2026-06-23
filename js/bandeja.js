@@ -27,10 +27,10 @@ $(document).ready(function () {
     const proximosVencer = casos.filter(c => c.semaforo === 'amarillo').length;
     const cerradosHoy = casos.filter(c => c.estado === 'Cerrado' && c.fechaRadicacion === '07/05/2026').length;
 
-    $('#stat-activos').text(activos);
-    $('#stat-vencidos').text(vencidos);
-    $('#stat-proximos').text(proximosVencer);
-    $('#stat-cerrados').text(cerradosHoy);
+    document.getElementById('stat-activos').textContent = activos;
+    document.getElementById('stat-vencidos').textContent = vencidos;
+    document.getElementById('stat-proximos').textContent = proximosVencer;
+    document.getElementById('stat-cerrados').textContent = cerradosHoy;
   }
 
   /* ========== Filter & Sort ========== */
@@ -95,7 +95,6 @@ $(document).ready(function () {
           </td>
         </tr>
       `);
-      lucide.createIcons();
       renderPagination(filtered.length, totalPages);
       return;
     }
@@ -137,7 +136,6 @@ $(document).ready(function () {
       `);
     });
 
-    lucide.createIcons();
     renderPagination(filtered.length, totalPages);
   }
 
@@ -178,7 +176,6 @@ $(document).ready(function () {
       </button>
     `);
 
-    lucide.createIcons();
   }
 
   /* ========== Event Handlers ========== */
@@ -260,18 +257,18 @@ $(document).ready(function () {
 
   // Sidebar toggle
   $('#sidebar-toggle').on('click', function () {
-    $('#app-sidebar').toggleClass('collapsed');
+    document.getElementById('app-sidebar').classList.toggle('collapsed');
   });
 
   // Mobile menu
   $('#mobile-menu-btn').on('click', function () {
-    $('#app-sidebar').addClass('mobile-open');
-    $('#sidebar-overlay').addClass('show');
+    document.getElementById('app-sidebar').classList.add('mobile-open');
+    document.getElementById('sidebar-overlay').classList.add('show');
   });
 
   $('#sidebar-overlay, #sidebar-close-mobile').on('click', function () {
-    $('#app-sidebar').removeClass('mobile-open');
-    $('#sidebar-overlay').removeClass('show');
+    document.getElementById('app-sidebar').classList.remove('mobile-open');
+    document.getElementById('sidebar-overlay').classList.remove('show');
   });
 
   // Logout
@@ -284,7 +281,7 @@ $(document).ready(function () {
   const now = new Date();
   const dateStr = now.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });
   const timeStr = now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
-  $('#current-datetime').text(`${dateStr} ${timeStr}`);
+  document.getElementById('current-datetime').textContent = `${dateStr} ${timeStr}`;
 
   /* ========== Initial Render ========== */
   renderStats();

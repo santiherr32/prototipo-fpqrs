@@ -1,0 +1,453 @@
+/* ---------- Badges / Pills ---------- */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  border-radius: 9999px;
+  white-space: nowrap;
+  font-size: 10px;
+  padding: 2px 6px;
+  line-height: 1.4;
+}
+
+.badge-pill.badge-lg {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+}
+
+/* Type badges */
+.badge-felicitacion {
+  background: var(--emerald-50);
+  color: var(--emerald-700);
+}
+
+.badge-peticion {
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+
+.badge-queja {
+  background: var(--orange-50);
+  color: var(--orange-700);
+}
+
+.badge-reclamo {
+  background: var(--red-50);
+  color: var(--red-600);
+}
+
+.badge-sugerencia {
+  background: var(--purple-50);
+  color: var(--purple-700);
+}
+
+/* Status badges */
+.badge-radicado {
+  background: var(--status-radicado-bg);
+  color: var(--status-radicado);
+}
+
+.badge-en-gestion {
+  background: var(--status-engestion-bg);
+  color: var(--status-engestion);
+}
+
+.badge-pendiente {
+  background: var(--status-pendiente-bg);
+  color: var(--status-pendiente);
+}
+
+.badge-cerrado {
+  background: var(--status-cerrado-bg);
+  color: var(--status-cerrado);
+}
+
+.badge-anulado {
+  background: var(--status-anulado-bg);
+  color: var(--status-anulado);
+}
+
+/* Priority badges */
+.badge-baja {
+  background: var(--priority-baja-bg);
+  color: var(--priority-baja);
+}
+
+.badge-normal {
+  background: var(--priority-normal-bg);
+  color: var(--priority-normal);
+}
+
+.badge-alta {
+  background: var(--priority-alta-bg);
+  color: var(--priority-alta);
+}
+
+.badge-critica {
+  background: var(--priority-critica-bg);
+  color: var(--priority-critica);
+}
+
+/* SLA badges */
+.badge-sla-verde {
+  background: var(--sla-verde-bg);
+  color: var(--sla-verde);
+}
+
+.badge-sla-verde .sla-dot {
+  background: var(--sla-verde);
+}
+
+.badge-sla-amarillo {
+  background: var(--sla-amarillo-bg);
+  color: var(--sla-amarillo);
+}
+
+.badge-sla-amarillo .sla-dot {
+  background: var(--sla-amarillo);
+}
+
+.badge-sla-rojo {
+  background: var(--sla-rojo-bg);
+  color: var(--sla-rojo);
+}
+
+.badge-sla-rojo .sla-dot {
+  background: var(--sla-rojo);
+}
+
+.badge-sla-gris {
+  background: var(--sla-gris-bg);
+  color: var(--sla-gris);
+}
+
+.badge-sla-gris .sla-dot {
+  background: var(--sla-gris);
+}
+
+.sla-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- Form Controls ---------- */
+.form-label-custom {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 0.375rem;
+}
+
+.form-label-custom .required {
+  color: var(--red-500);
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.375rem;
+}
+
+.form-control-custom {
+  width: 100%;
+  height: 40px;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  font-size: 0.875rem;
+  background: var(--background);
+  color: var(--foreground);
+  outline: none;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.form-control-custom:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.1);
+}
+
+.form-control-custom:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-control-custom::placeholder {
+  color: var(--muted-foreground);
+}
+
+textarea.form-control-custom {
+  height: auto;
+  padding: 0.625rem 0.75rem;
+  resize: none;
+}
+
+select.form-control-custom {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+/* Password toggle */
+.password-wrapper {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.password-toggle:hover {
+  color: var(--foreground);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0.625rem 1.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary-custom:hover {
+  background: var(--primary-hover);
+}
+
+.btn-primary-custom:active {
+  transform: scale(0.99);
+}
+
+.btn-primary-custom:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-outline-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--card);
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline-custom:hover {
+  color: var(--foreground);
+  border-color: rgba(30, 41, 59, 0.4);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-foreground);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0.625rem 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+}
+
+.btn-accent:active {
+  transform: scale(0.99);
+}
+
+.btn-danger-outline {
+  background: var(--red-50);
+  color: var(--red-600);
+  border: 1px solid var(--red-200);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0.625rem 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-danger-outline:hover {
+  background: #fecaca;
+}
+
+.btn-danger-outline:active {
+  transform: scale(0.99);
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb-custom {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb-custom a {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb-custom a:hover {
+  color: var(--primary);
+}
+
+.breadcrumb-custom .current {
+  color: var(--foreground);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Toast Notifications ---------- */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-card-md);
+  animation: slideInRight 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toast.toast-success {
+  background: var(--accent);
+  color: #fff;
+}
+
+.toast.toast-error {
+  background: var(--red-600);
+  color: #fff;
+}
+
+.toast.toast-info {
+  background: var(--primary);
+  color: #fff;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ---------- Animations ---------- */
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.5rem;
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
+
+.modal-overlay.show .modal-content {
+  transform: scale(1);
+}

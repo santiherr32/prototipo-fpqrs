@@ -1,0 +1,111 @@
+.login-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.login-panel {
+  display: none;
+  width: 520px;
+  background: var(--primary);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+  .login-panel {
+    display: flex;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-panel {
+    width: 600px;
+  }
+}
+
+.login-panel .blob-primary {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
+}
+
+.login-form-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--background);
+  overflow-y: auto;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.login-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.login-feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.demo-accounts {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.demo-accounts-header {
+  background: var(--background);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-account-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-account-row:last-child {
+  border-bottom: none;
+}
+
+.demo-account-row:hover {
+  background: var(--card-hover);
+}
+
+.demo-role-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(30, 41, 59, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+

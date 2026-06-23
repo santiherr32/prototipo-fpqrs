@@ -96,7 +96,6 @@ $(document).ready(function () {
     
     const icon = isPassword ? 'eye-off' : 'eye';
     $(this).html(`<i data-lucide="${icon}" style="width:16px;height:16px;"></i>`);
-    lucide.createIcons();
   });
 
   // Click en cuentas demo para autocompletar
@@ -115,9 +114,9 @@ $(document).ready(function () {
   $('#login-form').on('submit', function (e) {
     e.preventDefault();
 
-    const correo = $('#correo').val().trim();
-    const contrasena = $('#contrasena').val();
-    const recordar = $('#recordarme').is(':checked');
+    const correo = document.getElementById('correo').value.trim();
+    const contrasena = document.getElementById('contrasena').value;
+    const recordar = document.getElementById('recordarme').checked;
 
     // Limpiar errores previos
     $('#login-error').addClass('d-none');

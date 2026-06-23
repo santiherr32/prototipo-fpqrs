@@ -149,7 +149,6 @@ $(document).ready(function () {
       `);
     });
 
-    lucide.createIcons();
   }
 
   // Remove file
@@ -234,8 +233,8 @@ $(document).ready(function () {
       const radicado = generarRadicado();
 
       // Show success modal
-      $('#modal-radicado').text(radicado);
-      $('#modal-exito').addClass('show');
+      document.getElementById('modal-radicado').textContent = radicado;
+      document.getElementById('modal-exito').classList.add('show');
 
       $btn.prop('disabled', false).html(btnText);
     }, 1500);
@@ -247,7 +246,7 @@ $(document).ready(function () {
   });
 
   $('#btn-nuevo-caso').on('click', function () {
-    $('#modal-exito').removeClass('show');
+    document.getElementById('modal-exito').classList.remove('show');
     // Reset form
     $('#fpqrs-form')[0].reset();
     $('#categoria').html('<option value="">Seleccionar categoría...</option>').prop('disabled', true);

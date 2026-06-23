@@ -4,7 +4,7 @@
  */
 
 const APP_DATA = {
-  /* ========== Usuarios de demo ========== */
+  /* Usuarios de demo */
   usuarios: [
     {
       id: 'u-01',
@@ -29,7 +29,7 @@ const APP_DATA = {
     }
   ],
 
-  /* ========== Tipos de identificación ========== */
+  /* Tipos de identificación */
   tiposIdentificacion: [
     { id: 'ti-01', nombre: 'Cédula de Ciudadanía' },
     { id: 'ti-02', nombre: 'Cédula de Extranjería' },
@@ -37,7 +37,7 @@ const APP_DATA = {
     { id: 'ti-04', nombre: 'Pasaporte' }
   ],
 
-  /* ========== Tipos de caso ========== */
+  /* Tipos de caso */
   tiposCaso: [
     { id: 'tc-01', nombre: 'Felicitación', badge: 'badge-felicitacion' },
     { id: 'tc-02', nombre: 'Petición', badge: 'badge-peticion' },
@@ -46,7 +46,7 @@ const APP_DATA = {
     { id: 'tc-05', nombre: 'Sugerencia', badge: 'badge-sugerencia' }
   ],
 
-  /* ========== Prioridades ========== */
+  /* Prioridades */
   prioridades: [
     { id: 'pr-01', nombre: 'Baja', badge: 'badge-baja', slaHoras: 72 },
     { id: 'pr-02', nombre: 'Normal', badge: 'badge-normal', slaHoras: 48 },
@@ -54,7 +54,7 @@ const APP_DATA = {
     { id: 'pr-04', nombre: 'Crítica', badge: 'badge-critica', slaHoras: 4 }
   ],
 
-  /* ========== Estados ========== */
+  /* Estados */
   estados: [
     { id: 'es-01', nombre: 'Radicado', badge: 'badge-radicado' },
     { id: 'es-02', nombre: 'En Gestión', badge: 'badge-en-gestion' },
@@ -63,7 +63,7 @@ const APP_DATA = {
     { id: 'es-05', nombre: 'Anulado', badge: 'badge-anulado' }
   ],
 
-  /* ========== Servicios → Categorías → Subcategorías ========== */
+  /* Servicios → Categorías → Subcategorías */
   servicios: [
     {
       id: 'sv-01', nombre: 'Crédito',
@@ -153,7 +153,7 @@ const APP_DATA = {
     }
   ],
 
-  /* ========== Responsables ========== */
+  /* Responsables */
   responsables: [
     { id: 'r-01', nombre: 'Valentina Ospina Ríos', area: 'Atención al Asociado' },
     { id: 'r-02', nombre: 'Jorge Iván Castillo', area: 'Pagos y Transferencias' },
@@ -166,7 +166,7 @@ const APP_DATA = {
     { id: 'r-09', nombre: 'Rodrigo Esteban Muñoz', area: 'Operaciones Financieras' }
   ],
 
-  /* ========== Casos de la bandeja ========== */
+  /* Casos de la bandeja */
   casos: [
     {
       id: 'c-01', radicado: 'FPQRS-2026-04758', fechaRadicacion: '07/05/2026',
@@ -275,7 +275,7 @@ const APP_DATA = {
     }
   ],
 
-  /* ========== Detalle de caso (para la vista de detalle) ========== */
+  /* Detalle de caso (para la vista de detalle) */
   casoDetalle: {
     radicado: 'FPQRS-2026-04779',
     fechaRadicacion: '04/05/2026 18:00',
@@ -355,9 +355,9 @@ const APP_DATA = {
   }
 };
 
-/* ========== Helper Functions ========== */
+/*  Helper Functions  */
 
-/**
+/* 
  * Obtener badge CSS class según el tipo
  */
 function getBadgeTipo(tipo) {
@@ -436,10 +436,6 @@ function showToast(mensaje, tipo = 'success') {
   `;
   container.appendChild(toast);
 
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-  }
-
   setTimeout(() => {
     toast.style.opacity = '0';
     toast.style.transform = 'translateX(100%)';
@@ -447,3 +443,47 @@ function showToast(mensaje, tipo = 'success') {
     setTimeout(() => toast.remove(), 300);
   }, 3000);
 }
+
+/* Renderizado automatico de iconos con MutationObserver */
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof lucide === 'undefined') return;
+
+  function renderIconsAndClean() {
+    lucide.createIcons();
+    // Remover data-lucide de los SVG generados para evitar loops infinitos si lucide vuelve a escanear
+    document.querySelectorAll('svg[data-lucide]').forEach(svg => {
+      svg.removeAttribute('data-lucide');
+    });
+  }
+
+  // Render inicial
+  renderIconsAndClean();
+
+  // Observador para nodos dinámicos
+  const observer = new MutationObserver((mutations, obs) => {
+    let needsRender = false;
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (node.nodeType === 1) { // Node.ELEMENT_NODE
+          if (node.hasAttribute('data-lucide')) {
+            needsRender = true;
+            break;
+          }
+          if (node.querySelectorAll && node.querySelectorAll('[data-lucide]').length > 0) {
+            needsRender = true;
+            break;
+          }
+        }
+      }
+      if (needsRender) break;
+    }
+
+    if (needsRender) {
+      obs.disconnect(); // Desconectar temporalmente para evitar loop de mutaciones
+      renderIconsAndClean();
+      obs.observe(document.body, { childList: true, subtree: true });
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});

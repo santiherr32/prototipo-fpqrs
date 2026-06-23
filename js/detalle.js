@@ -44,7 +44,6 @@ $(document).ready(function () {
         </div>
       `);
     });
-    lucide.createIcons();
   }
 
   /* ========== Render Adjuntos ========== */
@@ -67,7 +66,6 @@ $(document).ready(function () {
         </div>
       `);
     });
-    lucide.createIcons();
   }
 
   /* ========== Render Historial ========== */
@@ -91,7 +89,6 @@ $(document).ready(function () {
         </div>
       `);
     });
-    lucide.createIcons();
   }
 
   /* ========== Estado Dropdown ========== */
@@ -330,17 +327,17 @@ $(document).ready(function () {
 
   /* ========== Sidebar & Navigation ========== */
   $('#sidebar-toggle').on('click', function () {
-    $('#app-sidebar').toggleClass('collapsed');
+    document.getElementById('app-sidebar').classList.toggle('collapsed');
   });
 
   $('#mobile-menu-btn').on('click', function () {
-    $('#app-sidebar').addClass('mobile-open');
-    $('#sidebar-overlay').addClass('show');
+    document.getElementById('app-sidebar').classList.add('mobile-open');
+    document.getElementById('sidebar-overlay').classList.add('show');
   });
 
   $('#sidebar-overlay').on('click', function () {
-    $('#app-sidebar').removeClass('mobile-open');
-    $('#sidebar-overlay').removeClass('show');
+    document.getElementById('app-sidebar').classList.remove('mobile-open');
+    document.getElementById('sidebar-overlay').classList.remove('show');
   });
 
   $('#btn-logout').on('click', function (e) {

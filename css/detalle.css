@@ -2,7 +2,6 @@
 .card-section {
   background: var(--card);
   border-radius: 0.75rem;
-  box-shadow: var(--shadow-card);
   border: 1px solid var(--border);
   overflow: hidden;
 }

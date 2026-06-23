@@ -166,41 +166,59 @@ $(document).ready(function () {
       { id: '#identificacion', name: 'Número de identificación' },
       { id: '#nombre-completo', name: 'Nombre completo' },
       { id: '#correo', name: 'Correo electrónico' },
-      { id: '#celular', name: 'Número de celular' },
       { id: '#tipo-caso', name: 'Tipo de caso' },
       { id: '#servicio', name: 'Servicio' },
       { id: '#categoria', name: 'Categoría' },
-      { id: '#subcategoria', name: 'Subcategoría' },
-      { id: '#descripcion', name: 'Descripción' }
+      { id: '#subcategoria', name: 'Subcategoría' }
     ];
 
     // Remove previous error states
-    $('.form-control-custom').css('border-color', '');
-    $('.field-error').remove();
+    $('.form-control-custom').removeClass('is-invalid').css('border-color', '');
+    $('.field-error, .invalid-feedback-custom').remove();
+    $('label[for="celular"]').css('color', '');
+    $('#acepta-tratamiento-card').removeClass('checkbox-container-invalid');
 
     requiredFields.forEach(field => {
       const $el = $(field.id);
       const val = $el.val();
       if (!val || val.trim() === '') {
         isValid = false;
-        $el.css('border-color', 'var(--red-500)');
-        $el.after(`<p class="field-error" style="color:var(--red-500);font-size:0.75rem;margin-top:4px;">Este campo es obligatorio</p>`);
+        $el.css('border-color', 'var(--red-600)');
+        $el.after(`<p class="field-error" style="color:var(--red-600);font-size:0.75rem;margin-top:4px;">Este campo es obligatorio</p>`);
       }
     });
+
+    // Celular validation
+    const celular = $('#celular').val();
+    if (!celular || !/^3\d{9}$/.test(celular)) {
+      isValid = false;
+      $('#celular').addClass('is-invalid');
+      $('label[for="celular"]').css('color', 'var(--red-600)');
+      $('#celular').after('<div class="invalid-feedback-custom">Ingrese un número celular colombiano válido (10 dígitos)</div>');
+    }
+
+    // Descripción validation
+    const descripcion = $('#descripcion').val();
+    if (!descripcion || descripcion.trim().length < 20) {
+      isValid = false;
+      $('#descripcion').css('border-color', 'var(--red-600)');
+      $('#descripcion').after('<p class="field-error" style="color:var(--red-600);font-size:0.75rem;margin-top:4px;">La descripción debe tener al menos 20 caracteres</p>');
+    }
 
     // Email format
     const correo = $('#correo').val();
     if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
       isValid = false;
-      $('#correo').css('border-color', 'var(--red-500)');
+      $('#correo').css('border-color', 'var(--red-600)');
       $('#correo').next('.field-error').remove();
-      $('#correo').after(`<p class="field-error" style="color:var(--red-500);font-size:0.75rem;margin-top:4px;">Ingrese un correo válido</p>`);
+      $('#correo').after(`<p class="field-error" style="color:var(--red-600);font-size:0.75rem;margin-top:4px;">Ingrese un correo válido</p>`);
     }
 
     // Data treatment consent
     if (!$('#acepta-tratamiento').is(':checked')) {
       isValid = false;
-      showToast('Debe aceptar la política de tratamiento de datos', 'error');
+      $('#acepta-tratamiento-card').addClass('checkbox-container-invalid');
+      $('#acepta-tratamiento-container').append('<div class="invalid-feedback-custom mt-0">Debe aceptar el tratamiento de datos personales para continuar</div>');
     }
 
     return isValid;
@@ -232,21 +250,39 @@ $(document).ready(function () {
     setTimeout(() => {
       const radicado = generarRadicado();
 
-      // Show success modal
-      document.getElementById('modal-radicado').textContent = radicado;
-      document.getElementById('modal-exito').classList.add('show');
+      // Update and show inline success view
+      $('#success-radicado').text(radicado);
+      
+      const now = new Date();
+      const formatNum = (n) => n.toString().padStart(2, '0');
+      const dateStr = `${formatNum(now.getDate())}/${formatNum(now.getMonth() + 1)}/${now.getFullYear()} ${formatNum(now.getHours())}:${formatNum(now.getMinutes())}`;
+      $('#success-fecha').text(dateStr);
+      
+      now.setHours(now.getHours() + 72); // SLA 72h
+      const slaStr = `${formatNum(now.getDate())}/${formatNum(now.getMonth() + 1)}/${now.getFullYear()} ${formatNum(now.getHours())}:${formatNum(now.getMinutes())}`;
+      $('#success-sla').text(slaStr);
+
+      $('#form-container').hide();
+      $('#success-view').fadeIn();
+      
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
 
       $btn.prop('disabled', false).html(btnText);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 1500);
   });
 
-  // Modal actions
-  $('#btn-ir-bandeja').on('click', function () {
+  // Success view actions
+  $('#btn-ir-bandeja-inline').on('click', function () {
     window.location.href = 'bandeja.html';
   });
 
-  $('#btn-nuevo-caso').on('click', function () {
-    document.getElementById('modal-exito').classList.remove('show');
+  $('#btn-nuevo-caso-inline').on('click', function () {
+    $('#success-view').hide();
+    $('#form-container').fadeIn();
+    
     // Reset form
     $('#fpqrs-form')[0].reset();
     $('#categoria').html('<option value="">Seleccionar categoría...</option>').prop('disabled', true);
@@ -255,7 +291,17 @@ $(document).ready(function () {
     renderFileList();
     $('.form-control-custom').css('border-color', '');
     $('.field-error').remove();
+    $('.is-invalid').removeClass('is-invalid');
+    $('.invalid-feedback-custom').remove();
+    $('.checkbox-container-invalid').removeClass('checkbox-container-invalid');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  $('#btn-copiar').on('click', function() {
+    const text = $('#success-radicado').text();
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Número copiado al portapapeles', 'info');
+    });
   });
 
   // Clear validation on input
